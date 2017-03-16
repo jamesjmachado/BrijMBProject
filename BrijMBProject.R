@@ -21,7 +21,7 @@ print(dim(Groceries)[1])  # 9835 market baskets for shopping trips
 print(dim(Groceries)[2])  # 169 initial store items  
 
 # explore possibilities for combining similar items
-print(head(itemInfo(Groceries))) 
+print(itemInfo(Groceries[,25:32])) 
 print(levels(itemInfo(Groceries)[["level1"]]))  # 10 levels... too few 
 print(levels(itemInfo(Groceries)[["level2"]]))  # 55 distinct levels
 
@@ -53,8 +53,9 @@ print(summary(second.rules))  # yields 344 rules - yields 268 rules with support
 # select rules with dairy produts in consequent (right-hand-side) item subsets
 dairy.rules <- subset(second.rules, subset = rhs %pin% "dairy produce")
 inspect(dairy.rules)  # 58 rules - when the support = 0.025. If we use the support of 0.03 we get 47 rules.
-head(dairy.rules)
-
+print(itemInfo(Groceries[,25:32]))
+top.dairy.rules <- head(sort(dairy.rules, decreasing = TRUE, by = "lift"), 10)
+inspect(top.dairy.rules)
 
 #  ---------------------------------------------------------------------------
 #  Question 3 - 
